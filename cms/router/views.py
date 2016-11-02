@@ -2,7 +2,6 @@ from django.shortcuts import Http404
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 
 from cms.common.utils import served_langs
 from cms.pages.models import Page, PageCategory

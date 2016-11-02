@@ -27,7 +27,6 @@ def generate_meta(title=None, title_suffix=True, description=None,
         title += settings.site_name
     if not title:
         title = settings.site_name
-    print(title)
     return {
         'title': title,
         'description': description or settings.meta_description,
