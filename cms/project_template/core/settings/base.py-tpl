@@ -163,7 +163,7 @@ CRON_CLASSES = (
 
 # Admin
 
-GRAPPELLI_ADMIN_TITLE = _('Admin panel')
+GRAPPELLI_ADMIN_TITLE = 'PixelCMS'
 GRAPPELLI_INDEX_DASHBOARD = 'cms.admin_addons.dashboard.IndexDashboard'
 GRAPPELLI_AUTOCOMPLETE_SEARCH_FIELDS = {
     'content': {
