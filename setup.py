@@ -24,10 +24,10 @@ setup(
     include_package_data=True,
     install_requires=[
         'Django>=1.10,<1.11',
-        'django-autoslug>=1.9.3,<2',
+        'django-autoslug>=1.9.4.dev0,<2',
         'django-cron>=0.4.6,<1',
         'django-filebrowser>=3.7.2,<4',
-        'django-grappelli>=2.8.1,<3',
+        'django-grappelli>=2.9.1,<3',
         'django-polymorphic>=1.0,<2',
         'djangorestframework>=3.4.6,<4',
         'djangorestframework-camel-case>=0.2.0,<1',
