@@ -175,7 +175,10 @@ class Category(mixins.Seo):
         except AttributeError:
             return None
         version = self.articles_images_size
-        return image.version_generate(version).url
+        try:
+            return image.version_generate(version).url
+        except OSError:
+            return None
 
 
 class Article(mixins.Seo):
@@ -294,8 +297,7 @@ class ArticleImage(models.Model):
         Article, verbose_name=_('article'), related_name='images'
     )
     image = FileBrowseField(
-        _('image'), format='Image',
-        max_length=200, null=True, blank=True
+        _('image'), max_length=200, null=True, blank=True
     )
     published = models.BooleanField(_('published'), default=True)
     order = models.PositiveSmallIntegerField(_('order'), default=0)
@@ -319,7 +321,10 @@ class ArticleImage(models.Model):
         except AttributeError:
             version = '3cols'
 
-        return self.image.original.version_generate(version).url
+        try:
+            return self.image.original.version_generate(version).url
+        except OSError:
+            return None
 
 
 class ContentModule(mixins.Module):
@@ -388,7 +393,10 @@ class ArticlesModule(mixins.Module):
         except AttributeError:
             return None
         version = self.articles_images_size
-        return image.version_generate(version).url
+        try:
+            return image.version_generate(version).url
+        except OSError:
+            return None
 
 
 class ArticlesModuleArticle(models.Model):

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from polymorphic.models import PolymorphicModel
 from autoslug import AutoSlugField
@@ -42,11 +43,34 @@ class Page(PolymorphicModel):
 
     @property
     def route(self):
-        if not self.pk:
-            return ''
         if self.homepage:
             return '/'
         return '/{}'.format(self.slug)
+
+    @property
+    def all_routes(self):
+        if not self.pk:
+            return None
+
+        if self.homepage:
+            pathWithoutLang = '/'
+        else:
+            pathWithoutLang = '/{}'.format(self.slug)
+
+        routes = []
+        if self.language == settings.LANGUAGES[0][0]:  # default language
+            routes.append(pathWithoutLang)
+        elif self.language == 'any':  # any language
+            for lang in settings.LANGUAGES:
+                if lang[0] == settings.LANGUAGES[0][0]:
+                    routes.append(pathWithoutLang)
+                else:
+                    routes.append('/{}{}'.format(lang[0], pathWithoutLang))
+
+        else:  # other than default language
+            routes.append('/{}{}'.format(self.language, pathWithoutLang))
+
+        return routes
 
     @property
     def deps_published(self):

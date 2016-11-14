@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-10 16:32+0100\n"
-"PO-Revision-Date: 2016-11-10 16:34+0100\n"
+"POT-Creation-Date: 2016-11-14 10:40+0100\n"
+"PO-Revision-Date: 2016-11-14 10:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -19,23 +19,23 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: cms/accounts/apps.py:7
+#: accounts/apps.py:7
 msgid "Accounts"
 msgstr "Konta"
 
-#: cms/accounts/models.py:14
+#: accounts/models.py:14
 msgid "user"
 msgstr "użytkownik"
 
-#: cms/accounts/models.py:20
+#: accounts/models.py:20
 msgid "account"
 msgstr "konto"
 
-#: cms/accounts/models.py:21
+#: accounts/models.py:21
 msgid "accounts"
 msgstr "konta"
 
-#: cms/accounts/models.py:37
+#: accounts/models.py:39
 msgid ""
 "Your accounts has been created. To activate it click on link below, or copy "
 "it to your browser."
@@ -43,49 +43,41 @@ msgstr ""
 "Twoje konto zostało utworzone. Aby je aktywować kliknij w link poniżej, lub "
 "skopiuj go do przeglądarki."
 
-#: cms/accounts/models.py:41
+#: accounts/models.py:43
 msgid "Activate your account"
 msgstr "Aktywuj swoje konto"
 
-#: cms/accounts/models.py:58
+#: accounts/models.py:62
 msgid "To change you password click on link below, or copy it to your browser."
 msgstr ""
 "Aby zmienić swoje hasło kliknij w link poniżej, lub skopiuj go do "
 "przeglądarki."
 
-#: cms/accounts/models.py:62
+#: accounts/models.py:66
 msgid "Change your password"
 msgstr "Zmień swoje hasło"
 
-#: cms/accounts/serializers.py:29
+#: accounts/serializers.py:29
 msgid "Provided username is already taken."
 msgstr "Podana nazwa użytkownika jest już zajęta."
 
-#: cms/accounts/serializers.py:37
+#: accounts/serializers.py:37
 msgid "Provided email address is already taken."
 msgstr "Podany adres email jest już zajęty."
 
-#: cms/accounts/serializers.py:49 cms/accounts/serializers.py:78
+#: accounts/serializers.py:49 accounts/serializers.py:78
 msgid "Passwords do not match."
 msgstr "Hasła nie pasują do siebie"
 
-#: cms/accounts/views.py:30
-msgid "You have been logged out."
-msgstr "Wylogowano."
-
-#: cms/accounts/views.py:39 cms/accounts/views.py:64
+#: accounts/views.py:50
 msgid "You have been logged in."
 msgstr "Zalogowano."
 
-#: cms/accounts/views.py:68
+#: accounts/views.py:55
 msgid "Wrong username or password."
 msgstr "Nieprawidłowa nazwa użytkownika, lub hasło."
 
-#: cms/accounts/views.py:78
-msgid "You are already logged in."
-msgstr "Jesteś już zalogowany."
-
-#: cms/accounts/views.py:97
+#: accounts/views.py:76
 msgid ""
 "Your account has been created. Activation message has been sent to provided "
 "email address."
@@ -93,33 +85,39 @@ msgstr ""
 "Twoje konto zostało utworzone. Wiadomość aktywacyjna została wysłana na "
 "podany adres email."
 
-#: cms/accounts/views.py:111
-msgid "You account has been created. You are logged in."
-msgstr "Twoje konto zostało utworzone. Zalogowano."
+#: accounts/views.py:89
+msgid "You account has been created. You can log in."
+msgstr "Twoje konto zostało utworzone. Możesz się zalogować."
 
-#: cms/accounts/views.py:123
+#: accounts/views.py:100
 msgid "Activation key is invalid."
 msgstr "Klucz aktywacyjny jest nieprawidłowy."
 
-#: cms/accounts/views.py:136
+#: accounts/views.py:117
 msgid "Your account is now active. You can log in."
 msgstr "Twoje konto zostało aktywowane. Możesz się zalogować."
 
-#: cms/accounts/views.py:146
+#: accounts/views.py:123
+msgid ""
+"Activation key is not associated with any account that needs activation."
+msgstr ""
+"Klucz aktywacyjny nie jest powiązany z żadnym kontem wymagającym aktywacji."
+
+#: accounts/views.py:131
 msgid "Activation key has expired."
 msgstr "Klucz aktywacyjny wygasł."
 
-#: cms/accounts/views.py:166
+#: accounts/views.py:152
 msgid "Activation message has been sent to provided email address."
 msgstr "Wiadomość aktywacyjna została wysłana na podany adres email."
 
-#: cms/accounts/views.py:173
+#: accounts/views.py:159
 msgid ""
 "Provided email is not associated with any account that needs to be activated."
 msgstr ""
 "Podany adres email nie jest powiązany z żadnym kontem wymagającym aktywacji."
 
-#: cms/accounts/views.py:188
+#: accounts/views.py:174
 msgid ""
 "Message with instructions how to change your password has been sent to "
 "provided email address."
@@ -127,146 +125,146 @@ msgstr ""
 "Wiadomość z instrukcjami jak zmienić hasło została wysłana na podany adres "
 "email."
 
-#: cms/accounts/views.py:196
+#: accounts/views.py:182
 msgid "Provided email is not associated with any account."
 msgstr "Podany adres email nie jest powiązany z żadnym kontem."
 
-#: cms/accounts/views.py:209
+#: accounts/views.py:195
 msgid "Change password key is invalid."
 msgstr "Klucz zmiany hasła jest nieprawidłowy."
 
-#: cms/accounts/views.py:227
-msgid "Your password has been changed. You are logged in."
-msgstr "Twoje hasło zostało zmienione. Zalogowano."
+#: accounts/views.py:208
+msgid "Your password has been changed. You can log in."
+msgstr "Twoje hasło zostało zmienione. Możesz się zalogować."
 
-#: cms/accounts/views.py:237
+#: accounts/views.py:218
 msgid "Change password key has expired."
 msgstr "Klucz zmiany hasła wygasł."
 
-#: cms/admin_addons/actions.py:13
+#: admin_addons/actions.py:13
 msgid "Failed to duplicate \"{}\"."
 msgstr "Nie udało się powielić \"{}\"."
 
-#: cms/admin_addons/actions.py:16
+#: admin_addons/actions.py:16
 msgid "Duplicate selected items"
 msgstr "Powiel zaznaczone elementy."
 
-#: cms/admin_addons/apps.py:7
+#: admin_addons/apps.py:7
 msgid "Admin addons"
 msgstr "Dodatki administracyjne"
 
-#: cms/admin_addons/dashboard.py:12 cms/content/admin.py:90
-#: cms/content/apps.py:7 cms/emails/admin.py:11
+#: admin_addons/dashboard.py:12 content/admin.py:93 content/apps.py:7
+#: emails/admin.py:11
 msgid "Content"
 msgstr "Treść"
 
-#: cms/admin_addons/dashboard.py:21 cms/pages/apps.py:7
+#: admin_addons/dashboard.py:21 pages/apps.py:7
 msgid "Pages"
 msgstr "Strony"
 
-#: cms/admin_addons/dashboard.py:29
+#: admin_addons/dashboard.py:29
 msgid "Modules"
 msgstr "Moduły"
 
-#: cms/admin_addons/dashboard.py:39 cms/emails/apps.py:7
+#: admin_addons/dashboard.py:39 emails/apps.py:7
 msgid "Emails"
 msgstr "Emaile"
 
-#: cms/admin_addons/dashboard.py:47 cms/settings/apps.py:7
+#: admin_addons/dashboard.py:47 settings/apps.py:7
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: cms/admin_addons/dashboard.py:55
+#: admin_addons/dashboard.py:55
 msgid "Users"
 msgstr "Użytkownicy"
 
-#: cms/admin_addons/dashboard.py:65
+#: admin_addons/dashboard.py:65
 msgid "Files"
 msgstr "Pliki"
 
-#: cms/admin_addons/dashboard.py:70
+#: admin_addons/dashboard.py:70
 msgid "Manage files"
 msgstr "Zarządzaj plikami"
 
-#: cms/admin_addons/templates/admin/~base.html:91
+#: admin_addons/templates/admin/~base.html:91
 msgid "Change password"
 msgstr "Zmień hasło"
 
-#: cms/admin_addons/templates/admin/~base.html:94
+#: admin_addons/templates/admin/~base.html:94
 msgid "Log out"
 msgstr "Wyloguj się"
 
-#: cms/admin_addons/templates/admin/~base.html:101
+#: admin_addons/templates/admin/~base.html:101
 msgid "View site"
 msgstr "Pokaż stronę"
 
-#: cms/admin_addons/templates/admin/~base.html:106
+#: admin_addons/templates/admin/~base.html:106
 msgid "Documentation"
 msgstr "Dokumentacja"
 
-#: cms/admin_addons/templates/admin/~base.html:124
+#: admin_addons/templates/admin/~base.html:124
 msgid "Home"
 msgstr "Home"
 
-#: cms/common/fields.py:14
+#: common/fields.py:14
 msgid "any"
 msgstr "dowolny"
 
-#: cms/common/mixins.py:29 cms/content/models.py:23 cms/nav/models.py:26
+#: common/mixins.py:29 content/models.py:23 nav/models.py:26
 msgid "name"
 msgstr "nazwa"
 
-#: cms/common/mixins.py:30 cms/content/models.py:28 cms/content/models.py:187
-#: cms/content/models.py:300 cms/nav/models.py:49 cms/pages/models.py:21
+#: common/mixins.py:30 content/models.py:28 content/models.py:190
+#: content/models.py:302 nav/models.py:49 pages/models.py:22
 msgid "published"
 msgstr "opublikowano"
 
-#: cms/common/mixins.py:32
+#: common/mixins.py:32
 msgid "template id"
 msgstr "Identyfikator w szablonie"
 
-#: cms/common/mixins.py:36
+#: common/mixins.py:36
 msgid "show module name"
 msgstr "Pokazuj nazwę modułu"
 
-#: cms/common/mixins.py:39
+#: common/mixins.py:39
 msgid "module name header level"
 msgstr "Poziom nagłówka nazwy modułu"
 
-#: cms/common/mixins.py:43
+#: common/mixins.py:43
 msgid "HTML class"
 msgstr "klasa HTML"
 
-#: cms/common/mixins.py:45 cms/content/models.py:30 cms/content/models.py:189
-#: cms/pages/models.py:32 cms/settings/models.py:8
+#: common/mixins.py:45 content/models.py:30 content/models.py:192
+#: pages/models.py:33 settings/models.py:8
 msgid "language"
 msgstr "język"
 
-#: cms/common/mixins.py:62
+#: common/mixins.py:62
 msgid "Module settings"
 msgstr "Ustawienia modułu"
 
-#: cms/common/mixins.py:83
+#: common/mixins.py:83
 msgid "page title override"
 msgstr "Nadpisanie tytułu strony"
 
-#: cms/common/mixins.py:86 cms/settings/models.py:13
+#: common/mixins.py:86 settings/models.py:13
 msgid "site name suffix in page title"
 msgstr "Sufiks nazwy serwisu w tytule strony"
 
-#: cms/common/mixins.py:89
+#: common/mixins.py:89
 msgid "description override"
 msgstr "Nadpisanie opisu"
 
-#: cms/common/mixins.py:92
+#: common/mixins.py:92
 msgid "robots override"
 msgstr "Nadpisanie robotów"
 
-#: cms/common/mixins.py:101
+#: common/mixins.py:101
 msgid "SEO options"
 msgstr "Opcje SEO"
 
-#: cms/common/mixins.py:102
+#: common/mixins.py:102
 msgid ""
 "Overrides values from <a href=\"/admin/settings/settings/\" target=\"_blank"
 "\">global settings</a>."
@@ -274,23 +272,23 @@ msgstr ""
 "Nadpisuje wartości z <a href=\"/admin/settings/settings/\" target=\"_blank"
 "\">ustawień globalnych</a>."
 
-#: cms/content/admin.py:15 cms/content/admin.py:62
+#: content/admin.py:15 content/admin.py:62 pages/admin.py:74
 msgid "Routes"
 msgstr "Ścieżki"
 
-#: cms/content/admin.py:33
+#: content/admin.py:33
 msgid "Category view settings"
 msgstr "Ustawienia widoku kategorii"
 
-#: cms/content/admin.py:41
+#: content/admin.py:41
 msgid "Article view settings"
 msgstr "Ustawienia widoku artykułów"
 
-#: cms/content/admin.py:72
+#: content/admin.py:75
 msgid "Image"
 msgstr "Obrazek"
 
-#: cms/content/admin.py:91
+#: content/admin.py:94
 msgid ""
 "<strong>Intro</strong> is displayed in category view and article view, "
 "<strong>Content</strong> is displayed only in article view."
@@ -298,261 +296,261 @@ msgstr ""
 "<strong>Wstęp</strong> jest wyświetlany w widoku kategorii i widoku "
 "artykułu, <strong>Treść</strong> jest wyświetlana tylko w widoku artykułu."
 
-#: cms/content/admin.py:100
+#: content/admin.py:103
 msgid "View settings"
 msgstr "Ustawienia ogólne"
 
-#: cms/content/admin.py:104
+#: content/admin.py:107
 msgid "Dates"
 msgstr "Daty"
 
-#: cms/content/admin.py:118
+#: content/admin.py:121
 msgid "Content module"
 msgstr "Moduł treści"
 
-#: cms/content/admin.py:156
+#: content/admin.py:159
 msgid "Articles module"
 msgstr "Moduł artykułów"
 
-#: cms/content/models.py:25 cms/content/models.py:184 cms/pages/models.py:18
+#: content/models.py:25 content/models.py:187 pages/models.py:19
 msgid "slug"
 msgstr "slug"
 
-#: cms/content/models.py:29 cms/content/models.py:188 cms/content/models.py:301
-#: cms/content/models.py:397 cms/content/models.py:412 cms/nav/models.py:50
-#: cms/pages/models.py:22
+#: content/models.py:29 content/models.py:191 content/models.py:303
+#: content/models.py:405 content/models.py:420 nav/models.py:50
+#: pages/models.py:23
 msgid "order"
 msgstr "kolejność"
 
-#: cms/content/models.py:32
+#: content/models.py:32
 msgid "parent"
 msgstr "rodzic"
 
-#: cms/content/models.py:35 cms/settings/models.py:19
+#: content/models.py:35 settings/models.py:19
 msgid "description"
 msgstr "opis"
 
-#: cms/content/models.py:38
+#: content/models.py:38
 msgid "show description"
 msgstr "pokazuj opis"
 
-#: cms/content/models.py:41
+#: content/models.py:41
 msgid "show article intros"
 msgstr "pokazuj wstępy artykułów"
 
-#: cms/content/models.py:44
+#: content/models.py:44
 msgid "show article contents"
 msgstr "pokazuj treści artykułów"
 
-#: cms/content/models.py:47
+#: content/models.py:47
 msgid "show article creation date"
 msgstr "pokazuj daty utworzenia artykułów"
 
-#: cms/content/models.py:50 cms/content/models.py:351
+#: content/models.py:50 content/models.py:356
 msgid "show article images"
 msgstr "pokazuj obrazki artykułów"
 
-#: cms/content/models.py:51
+#: content/models.py:51
 msgid "Shows thumbnail if set, otherwise first image."
 msgstr ""
 "Wyświetla miniaturkę jeśli została ustawiona, w przeciwnym razie pierwszy "
 "obrazek."
 
-#: cms/content/models.py:54 cms/content/models.py:67 cms/content/models.py:353
+#: content/models.py:54 content/models.py:67 content/models.py:358
 msgid "articles images size"
 msgstr "rozmiar obrazków artykułów"
 
-#: cms/content/models.py:56
+#: content/models.py:56
 msgid "pagination"
 msgstr "paginacja"
 
-#: cms/content/models.py:58
+#: content/models.py:58
 msgid "articles on page"
 msgstr "ilość artykułów na stronie"
 
-#: cms/content/models.py:62
+#: content/models.py:62
 msgid "show bradcrumbs"
 msgstr "pokazuj ścieżkę powrotu"
 
-#: cms/content/models.py:64 cms/content/models.py:203
+#: content/models.py:64 content/models.py:206
 msgid "show back link"
 msgstr "pokazuj link powrotu"
 
-#: cms/content/models.py:73 cms/content/models.py:191 cms/content/models.py:417
-#: cms/pages/models.py:79
+#: content/models.py:73 content/models.py:194 content/models.py:425
+#: pages/models.py:103
 msgid "category"
 msgstr "kategoria"
 
-#: cms/content/models.py:74 cms/content/models.py:418
+#: content/models.py:74 content/models.py:426
 msgid "categories"
 msgstr "kategorie"
 
-#: cms/content/models.py:182 cms/content/models.py:303 cms/pages/models.py:16
+#: content/models.py:185 content/models.py:305 pages/models.py:17
 msgid "title"
 msgstr "tytuł"
 
-#: cms/content/models.py:195
+#: content/models.py:198
 msgid "thumbnail"
 msgstr "miniaturka"
 
-#: cms/content/models.py:195
+#: content/models.py:198
 msgid "Displayed in category view."
 msgstr "Wyświetlane w widoku kategorii."
 
-#: cms/content/models.py:198
+#: content/models.py:201
 msgid "intro"
 msgstr "wstęp"
 
-#: cms/content/models.py:199 cms/content/models.py:326 cms/emails/models.py:19
+#: content/models.py:202 content/models.py:331 emails/models.py:19
 msgid "content"
 msgstr "treść"
 
-#: cms/content/models.py:201
+#: content/models.py:204
 msgid "show creation date"
 msgstr "pokazuj datę utworzenia"
 
-#: cms/content/models.py:202
+#: content/models.py:205
 msgid "show breadcrumbs"
 msgstr "pokazuj ścieżkę powrotu"
 
-#: cms/content/models.py:205
+#: content/models.py:208
 msgid "images thumbnails size"
 msgstr "Rozmiar miniaturek obrazków"
 
-#: cms/content/models.py:208
+#: content/models.py:211
 msgid "creation date"
 msgstr "data utworzenia"
 
-#: cms/content/models.py:210
+#: content/models.py:213
 msgid "last modification date"
 msgstr "data ostatniej modyfikacji"
 
-#: cms/content/models.py:216 cms/content/models.py:294
-#: cms/content/models.py:402 cms/pages/models.py:104
+#: content/models.py:219 content/models.py:297 content/models.py:410
+#: pages/models.py:128
 msgid "article"
 msgstr "artykuł"
 
-#: cms/content/models.py:217 cms/content/models.py:403
+#: content/models.py:220 content/models.py:411
 msgid "articles"
 msgstr "artykuły"
 
-#: cms/content/models.py:297 cms/content/models.py:309
+#: content/models.py:300 content/models.py:311
 msgid "image"
 msgstr "obrazek"
 
-#: cms/content/models.py:310
+#: content/models.py:312
 msgid "images"
 msgstr "obrazki"
 
-#: cms/content/models.py:330
+#: content/models.py:335
 msgid "content module"
 msgstr "moduł treści"
 
-#: cms/content/models.py:331
+#: content/models.py:336
 msgid "content modules"
 msgstr "moduły treści"
 
-#: cms/content/models.py:342
+#: content/models.py:347
 msgid "articles limit"
 msgstr "limit artykułów"
 
-#: cms/content/models.py:344
+#: content/models.py:349
 msgid "show articles titles"
 msgstr "pokazuj tytuły artykułów"
 
-#: cms/content/models.py:347
+#: content/models.py:352
 msgid "articles titles headers level"
 msgstr "poziom nagłówków tytułów artykułów"
 
-#: cms/content/models.py:355
+#: content/models.py:360
 msgid "show articles intros"
 msgstr "pokazuj wstępy artykułów"
 
-#: cms/content/models.py:358
+#: content/models.py:363
 msgid "show articles contents"
 msgstr "pokazuj treści artykułów"
 
-#: cms/content/models.py:363
+#: content/models.py:368
 msgid "articles module"
 msgstr "moduł artykułu"
 
-#: cms/content/models.py:364
+#: content/models.py:369
 msgid "articles modules"
 msgstr "moduły artykułów"
 
-#: cms/emails/models.py:17
+#: emails/models.py:17
 msgid "subject"
 msgstr "temat"
 
-#: cms/emails/models.py:18
+#: emails/models.py:18
 msgid "recipients"
 msgstr "odbiorcy"
 
-#: cms/emails/models.py:20
+#: emails/models.py:20
 msgid "reply to"
 msgstr "odpowiedź do"
 
-#: cms/emails/models.py:21
+#: emails/models.py:21
 msgid "created"
 msgstr "utworzono"
 
-#: cms/emails/models.py:22
+#: emails/models.py:22
 msgid "sent"
 msgstr "wysłano"
 
-#: cms/emails/models.py:23
+#: emails/models.py:23
 msgid "postdate"
 msgstr "data wysłania"
 
-#: cms/emails/models.py:28
+#: emails/models.py:28
 msgid "message"
 msgstr "wiadomość"
 
-#: cms/emails/models.py:29
+#: emails/models.py:29
 msgid "messages"
 msgstr "wiadomości"
 
-#: cms/emails/serializers.py:15
+#: emails/serializers.py:15
 msgid "(not provided)"
 msgstr "(nie podano)"
 
-#: cms/emails/serializers.py:35
+#: emails/serializers.py:35
 msgid "Name / company name"
 msgstr "Imię i nazwisko / nazwa firmy"
 
-#: cms/emails/serializers.py:36
+#: emails/serializers.py:36
 msgid "Email address"
 msgstr "Adres email"
 
-#: cms/emails/serializers.py:37
+#: emails/serializers.py:37
 msgid "Phone number"
 msgstr "Numer telefonu"
 
-#: cms/emails/serializers.py:42
+#: emails/serializers.py:42
 msgid "Contact form message"
 msgstr "Wiadomość z formularza kontaktowego"
 
-#: cms/live_admin/apps.py:7
+#: live_admin/apps.py:7
 msgid "Live admin"
 msgstr "Live admin"
 
-#: cms/nav/apps.py:7
+#: nav/apps.py:7
 msgid "Navigation"
 msgstr "Nawigacja"
 
-#: cms/nav/models.py:11
+#: nav/models.py:11
 msgid "nav module"
 msgstr "moduł nawigacji"
 
-#: cms/nav/models.py:12
+#: nav/models.py:12
 msgid "nav modules"
 msgstr "moduły nawigacji"
 
-#: cms/nav/models.py:23
+#: nav/models.py:23
 msgid "nav"
 msgstr "nawigacja"
 
-#: cms/nav/models.py:26
+#: nav/models.py:26
 msgid ""
 "Overrides <strong>Page</strong> title. Required when nav scrolls to element "
 "or is link."
@@ -560,104 +558,104 @@ msgstr ""
 "Nadpisuje tytuł <strong>Strony</strong>. Wymagane kiedy element nawigacji "
 "przewija do elementu, lub jest linkiem."
 
-#: cms/nav/models.py:32 cms/pages/models.py:37
+#: nav/models.py:32 pages/models.py:38
 msgid "page"
 msgstr "strona"
 
-#: cms/nav/models.py:36
+#: nav/models.py:36
 msgid "scroll to element"
 msgstr "przewiń do elementu"
 
-#: cms/nav/models.py:36
+#: nav/models.py:36
 msgid "HTML id of element on page. Overrides <strong>Page</strong>."
 msgstr ""
 "Identyfikator HTML elementu na stronie. Nadpisuje <strong>Stronę</strong>."
 
-#: cms/nav/models.py:42
+#: nav/models.py:42
 msgid "link"
 msgstr "link"
 
-#: cms/nav/models.py:42
+#: nav/models.py:42
 msgid "Overrides <strong>Page</strong> and <strong>Scroll to element</strong>."
 msgstr ""
 "Nadpisuje <strong>Stronę</strong> i <strong>Przewiń do elementu</strong>."
 
-#: cms/nav/models.py:47
+#: nav/models.py:47
 msgid "open link in new tab"
 msgstr "otwórz link w nowej karcie"
 
-#: cms/nav/models.py:55
+#: nav/models.py:55
 msgid "item"
 msgstr "element"
 
-#: cms/nav/models.py:56
+#: nav/models.py:56
 msgid "items"
 msgstr "elementy"
 
-#: cms/pages/admin.py:30
+#: pages/admin.py:32
 msgid "Category page"
 msgstr "Strona kategorii"
 
-#: cms/pages/admin.py:66
+#: pages/admin.py:68
 msgid "Page type"
 msgstr "Typ strony"
 
-#: cms/pages/models.py:24
+#: pages/models.py:25
 msgid "homepage"
 msgstr "strona główna"
 
-#: cms/pages/models.py:27
+#: pages/models.py:28
 msgid "react component name"
 msgstr "nazwa komponentu React"
 
-#: cms/pages/models.py:27
+#: pages/models.py:28
 msgid "Leave it blank to use default component."
 msgstr "Pozostaw puste, aby użyć domyślnego komponentu."
 
-#: cms/pages/models.py:38
+#: pages/models.py:39
 msgid "pages"
 msgstr "strony"
 
-#: cms/pages/models.py:84
+#: pages/models.py:108
 msgid "category page"
 msgstr "strona kategorii"
 
-#: cms/pages/models.py:85
+#: pages/models.py:109
 msgid "category pages"
 msgstr "strony kategorii"
 
-#: cms/pages/models.py:109
+#: pages/models.py:133
 msgid "article page"
 msgstr "strona artykułu"
 
-#: cms/pages/models.py:110
+#: pages/models.py:134
 msgid "article pages"
 msgstr "strony artykułów"
 
-#: cms/pages/models.py:130
+#: pages/models.py:154
 msgid "custom component page"
 msgstr "strona z własnym komponentem"
 
-#: cms/pages/models.py:131
+#: pages/models.py:155
 msgid "custom component pages"
 msgstr "strony z własnym komponentem"
 
-#: cms/router/apps.py:7
+#: router/apps.py:7
 msgid "Router"
 msgstr "Router"
 
-#: cms/settings/models.py:10
+#: settings/models.py:10
 msgid "site name"
 msgstr "nazwa serwisu"
 
-#: cms/settings/models.py:16
+#: settings/models.py:16
 msgid "suffix separator"
 msgstr "separator sufiksu"
 
-#: cms/settings/models.py:22
+#: settings/models.py:22
 msgid "robots"
 msgstr "roboty"
 
-#: cms/settings/models.py:28 cms/settings/models.py:29
+#: settings/models.py:28 settings/models.py:29
 msgid "general settings"
 msgstr "Ustawienia ogólne"

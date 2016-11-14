@@ -7,6 +7,10 @@ HTTPS = False
 HSTS = False
 DEBUG = True
 
+FRONTEND_ADDRESS = 'http://localhost:3000'
+
+ALLOWED_HOSTS = ('localhost',)
+CORS_ORIGIN_ALLOW_ALL = True
 
 if HTTPS:
     SECURE_SSL_REDIRECT = True

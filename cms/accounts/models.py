@@ -27,7 +27,9 @@ class Account(models.Model):
         key = signing.dumps({'action': 'ACTIVATE', 'user': self.user.pk})
         link = '<a href="{0}">{0}</a>'.format(
             request.build_absolute_uri(
-                '/activate/{}'.format(key)
+                '{}/accounts/activate/{}'.format(
+                    settings.FRONTEND_ADDRESS, key
+                )
             )
         )
         content = (
@@ -48,7 +50,9 @@ class Account(models.Model):
         key = signing.dumps({'action': 'RESET_PASSWORD', 'user': self.user.pk})
         link = '<a href="{0}">{0}</a>'.format(
             request.build_absolute_uri(
-                '/reset-password/{}'.format(key)
+                '{}/accounts/reset-password/{}'.format(
+                    settings.FRONTEND_ADDRESS, key
+                )
             )
         )
         content = (

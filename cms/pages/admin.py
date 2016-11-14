@@ -11,11 +11,13 @@ from cms.common import mixins
 from .models import Page, PageCategory, PageArticle, PageCustomComponent
 
 
-BASE_READONLY_FIELDSETS = ('route',)
+BASE_READONLY_FIELDSETS = ()
 BASE_FIELDSETS = (
     (None, {
-        'fields': ('title', 'slug', 'route', 'published', 'order', 'homepage',
-                   'react_component_name', 'language')
+        'fields': (
+            'title', 'slug', 'published', 'order', 'homepage',
+            'react_component_name', 'language'
+        )
     }),
 )
 
@@ -65,7 +67,14 @@ class PageAdmin(PolymorphicParentModelAdmin):
         return obj.get_real_instance_class()._meta.verbose_name
     page_type.short_description = _('Page type')
 
-    list_display = ('title', 'page_type', 'route', 'published', 'order',
+    def all_routes(self, obj):
+        return '<br />'.join(
+            '<a href="{0}">{0}</a>'.format(r) for r in obj.all_routes
+        )
+    all_routes.short_description = _('Routes')
+    all_routes.allow_tags = True
+
+    list_display = ('title', 'page_type', 'all_routes', 'published', 'order',
                     'homepage', 'language')
     list_filter = ('published', 'homepage', 'language')
     list_editable = ('published', 'order', 'language')

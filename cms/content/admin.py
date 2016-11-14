@@ -65,10 +65,13 @@ class ArticleAdmin(admin.ModelAdmin):
     def list_image(self, obj):
         image = obj.thumbnail_or_first_image
         if image:
-            return '<img src="{}" alt="" />'.format(
-                image.version_generate('admin_thumbnail').url
-            )
-        return ''
+            try:
+                return '<img src="{}" alt="" />'.format(
+                    image.version_generate('admin_thumbnail').url
+                )
+            except OSError:
+                return None
+        return None
     list_image.short_description = _('Image')
     list_image.allow_tags = True
 
