@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.conf import settings
 
 from autoslug import AutoSlugField
 from filebrowser.fields import FileBrowseField
@@ -169,14 +170,16 @@ class Category(mixins.Seo):
             published=True, language__in=utils.served_langs()
         )
 
-    def get_article_image(self, article):
+    def get_article_image(self, article, request):
         try:
             image = article.thumbnail_or_first_image.original
         except AttributeError:
             return None
         version = self.articles_images_size
         try:
-            return image.version_generate(version).url
+            return request.build_absolute_uri(
+                image.version_generate(version).url
+            )
         except OSError:
             return None
 
@@ -311,7 +314,7 @@ class ArticleImage(models.Model):
         verbose_name = _('image')
         verbose_name_plural = _('images')
 
-    def get_thumbnail(self):
+    def get_thumbnail(self, request):
         try:
             version = (
                 self.article.images_thumbnails_size or
@@ -322,9 +325,16 @@ class ArticleImage(models.Model):
             version = '3cols'
 
         try:
-            return self.image.original.version_generate(version).url
+            return request.build_absolute_uri(
+                self.image.original.version_generate(version).url
+            )
         except OSError:
             return None
+
+    def get_full_size(self, request):
+        return request.build_absolute_uri(
+            self.image.url
+        )
 
 
 class ContentModule(mixins.Module):
@@ -387,14 +397,16 @@ class ArticlesModule(mixins.Module):
         articles = Article.objects.filter(pk__in=pks)[:self.articles_limit]
         return articles
 
-    def get_article_image(self, article):
+    def get_article_image(self, article, request):
         try:
             image = article.thumbnail_or_first_image.original
         except AttributeError:
             return None
         version = self.articles_images_size
         try:
-            return image.version_generate(version).url
+            return request.build_absolute_uri(
+                image.version_generate(version).url
+            )
         except OSError:
             return None
 

@@ -10,7 +10,7 @@ from .models import Category, Article, ArticleImage, ContentModule, \
 
 
 class ArticleImageSerializer(serializers.ModelSerializer):
-    full_size = serializers.ReadOnlyField(source='image.url')
+    full_size = serializers.SerializerMethodField()
     thumbnail = serializers.SerializerMethodField()
 
     class Meta:
@@ -18,7 +18,10 @@ class ArticleImageSerializer(serializers.ModelSerializer):
         fields = ('full_size', 'thumbnail', 'title')
 
     def get_thumbnail(self, obj):
-        return obj.get_thumbnail()
+        return obj.get_thumbnail(request=self.context['request'])
+
+    def get_full_size(self, obj):
+        return obj.get_full_size(request=self.context['request'])
 
     def to_representation(self, obj):
         data = super(ArticleImageSerializer, self).to_representation(obj)
@@ -61,7 +64,9 @@ class CategoryArticleSerializer(serializers.ModelSerializer):
                   'created')
 
     def get_image(self, obj):
-        return obj.category.get_article_image(obj)
+        return obj.category.get_article_image(
+            article=obj, request=self.context['request']
+        )
 
     def to_representation(self, obj):
         data = super(CategoryArticleSerializer, self).to_representation(obj)
@@ -106,7 +111,9 @@ class CategorySerializer(serializers.ModelSerializer):
             articles = self._pagination.object_list
         else:
             articles = obj.articles
-        return CategoryArticleSerializer(articles, many=True).data
+        return CategoryArticleSerializer(
+            articles, many=True, context={'request': self.context['request']}
+        ).data
 
     def get_pagination(self, obj):
         if self._pagination and self._pagination.paginator.num_pages > 1:
@@ -147,7 +154,9 @@ class ArticlesModuleItemSerializer(serializers.ModelSerializer):
 
     def get_image(self, obj):
         module = self.root.instance
-        return module.get_article_image(obj)
+        return module.get_article_image(
+            article=obj, request=self.context['request']
+        )
 
     def to_representation(self, obj):
         data = super(ArticlesModuleItemSerializer, self).to_representation(obj)

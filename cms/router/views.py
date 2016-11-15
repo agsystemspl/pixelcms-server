@@ -56,7 +56,9 @@ def contentView(request, path):
                 )
                 return Response({
                     'component_name': 'Category',
-                    'component_data': CategorySerializer(category).data,
+                    'component_data': CategorySerializer(
+                        category, context={'request': request}
+                    ).data,
                     'meta': category.meta
                 })
             except Category.DoesNotExist:
@@ -68,7 +70,9 @@ def contentView(request, path):
                 )
                 return Response({
                     'component_name': 'Article',
-                    'component_data': ArticleSerializer(article).data,
+                    'component_data': ArticleSerializer(
+                        article, context={'request': request}
+                    ).data,
                     'meta': article.meta
                 })
             except Article.DoesNotExist:
