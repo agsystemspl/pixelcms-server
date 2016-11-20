@@ -11,5 +11,9 @@ urlpatterns = [
     url(
         r'^articles-module/(?P<template_id>[0-9a-z\-_]+)/$',
         views.ArticlesModuleView.as_view()
+    ),
+    url(
+        r'^categories-module/(?P<template_id>[0-9a-z\-_]+)/$',
+        views.CategoriesModuleView.as_view()
     )
 ]

@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
-from django.conf import settings
 
 from autoslug import AutoSlugField
 from filebrowser.fields import FileBrowseField
@@ -34,10 +33,15 @@ class Category(mixins.Seo):
         null=True, blank=True
     )
     description = models.TextField(_('description'), blank=True, default='')
+    image = FileBrowseField(_('image'), max_length=255, null=True, blank=True)
 
     show_description = models.BooleanField(
         _('show description'), default=True
     )
+    show_image = models.BooleanField(
+        _('show image'), default=True
+    )
+    image_size = FilebrowserVersionField(_('image size'))
     show_article_intros = models.BooleanField(
         _('show article intros'), default=True
     )
@@ -170,6 +174,15 @@ class Category(mixins.Seo):
             published=True, language__in=utils.served_langs()
         )
 
+    def get_image(self, request):
+        version = self.image_size
+        try:
+            return request.build_absolute_uri(
+                self.image.original.version_generate(version).url
+            )
+        except OSError:
+            return None
+
     def get_article_image(self, article, request):
         try:
             image = article.thumbnail_or_first_image.original
@@ -199,7 +212,7 @@ class Article(mixins.Seo):
     )
     thumbnail = FileBrowseField(
         _('thumbnail'), help_text=_('Displayed in category view.'),
-        format='Image', max_length=255, null=True, blank=True
+        max_length=255, null=True, blank=True
     )
     intro = models.TextField(_('intro'), blank=True, default='')
     content = models.TextField(_('content'), blank=True, default='')
@@ -428,6 +441,66 @@ class ArticlesModuleArticle(models.Model):
 
 class ArticlesModuleCategory(models.Model):
     module = models.ForeignKey(ArticlesModule)
+    category = models.ForeignKey(Category)
+    order = models.PositiveSmallIntegerField(_('order'), default=0)
+
+    class Meta:
+        app_label = 'content'
+        ordering = ('order',)
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
+
+    def __str__(self):
+        return self.category.name
+
+
+class CategoriesModule(mixins.Module):
+    categories = models.ManyToManyField(
+        Category, through='CategoriesModuleCategory', blank=True
+    )
+
+    show_names = models.BooleanField(
+        _('show names'), default=True
+    )
+    names_headers_level = models.CharField(
+        _('names headers level'), max_length=1,
+        choices=HEADERS_LEVEL_CHOICES, default='3'
+    )
+    show_descriptions = models.BooleanField(
+        _('show descriptions'), default=True
+    )
+    show_images = models.BooleanField(
+        _('show images'), default=True
+    )
+    images_size = FilebrowserVersionField(_('images size'))
+
+    class Meta(mixins.Module.Meta):
+        app_label = 'content'
+        verbose_name = _('categories module')
+        verbose_name_plural = _('categories modules')
+
+    @property
+    def items(self):
+        return self.categories.filter(
+            published=True, language__in=utils.served_langs()
+        )
+
+    def get_category_image(self, category, request):
+        try:
+            image = category.image.original
+        except AttributeError:
+            return None
+        version = self.images_size
+        try:
+            return request.build_absolute_uri(
+                image.version_generate(version).url
+            )
+        except OSError:
+            return None
+
+
+class CategoriesModuleCategory(models.Model):
+    module = models.ForeignKey(CategoriesModule)
     category = models.ForeignKey(Category)
     order = models.PositiveSmallIntegerField(_('order'), default=0)
 

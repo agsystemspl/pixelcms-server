@@ -2,8 +2,11 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 from cms.common import mixins
-from .models import Category, Article, ArticleImage, ContentModule, \
-    ArticlesModule, ArticlesModuleArticle, ArticlesModuleCategory
+from .models import (
+    Category, Article, ArticleImage, ContentModule, ArticlesModule,
+    ArticlesModuleArticle, ArticlesModuleCategory, CategoriesModule,
+    CategoriesModuleCategory
+)
 
 
 @admin.register(Category)
@@ -28,10 +31,11 @@ class CategoryAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('name', 'slug', ('published', 'order', 'language'),
-                       'parent', 'description')
+                       'parent', 'description', 'image')
         }),
         (_('Category view settings'), {
             'fields': ('show_description',
+                       ('show_image', 'image_size'),
                        ('show_article_intros', 'show_article_contents',
                         'show_articles_created'),
                        ('show_article_images', 'articles_images_size'),
@@ -166,3 +170,30 @@ class ArticlesModuleAdmin(mixins.ModuleAdmin):
     ]
 
     inlines = (ArticlesModuleArticleInline, ArticlesModuleCategoryInline)
+
+
+class CategoriesModuleCategoryInline(admin.TabularInline):
+    model = CategoriesModuleCategory
+    extra = 0
+    sortable_field_name = 'order'
+
+    raw_id_fields = ('category',)
+    autocomplete_lookup_fields = {'fk': ['category']}
+
+
+@admin.register(CategoriesModule)
+class CategoriesModuleAdmin(mixins.ModuleAdmin):
+    fieldsets = mixins.ModuleAdmin.fieldsets + [
+        (None, {
+            'classes': ('placeholder articlesmodulecategory_set-group',),
+            'fields': ()
+        }),
+        (_('Categories module'), {
+            'fields': (('show_names',
+                        'names_headers_level'),
+                       'show_descriptions',
+                       ('show_images', 'images_size'))
+        })
+    ]
+
+    inlines = (CategoriesModuleCategoryInline,)

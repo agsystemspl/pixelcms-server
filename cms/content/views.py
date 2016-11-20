@@ -3,9 +3,9 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 
 from cms.common.utils import current_lang, served_langs
-from .models import Category, ContentModule, ArticlesModule
+from .models import Category, ContentModule, ArticlesModule, CategoriesModule
 from .serializers import CategorySerializer, ContentModuleSerializer, \
-    ArticlesModuleSerializer
+    ArticlesModuleSerializer, CategoriesModuleSerializer
 
 
 class CategoryView(generics.RetrieveAPIView):
@@ -45,6 +45,25 @@ class ArticlesModuleView(generics.RetrieveAPIView):
             filters['language'] = current_lang()
             obj = queryset.get(**filters)
         except ArticlesModule.DoesNotExist:
+            del filters['language']
+            filters['language__in'] = served_langs()
+            obj = get_object_or_404(queryset, **filters)
+        return obj
+
+
+class CategoriesModuleView(generics.RetrieveAPIView):
+    queryset = CategoriesModule.objects.filter(published=True)
+    serializer_class = CategoriesModuleSerializer
+    lookup_field = 'template_id'
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        filters = {}
+        filters[self.lookup_field] = self.kwargs[self.lookup_field]
+        try:
+            filters['language'] = current_lang()
+            obj = queryset.get(**filters)
+        except CategoriesModule.DoesNotExist:
             del filters['language']
             filters['language__in'] = served_langs()
             obj = get_object_or_404(queryset, **filters)

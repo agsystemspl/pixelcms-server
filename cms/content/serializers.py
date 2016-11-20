@@ -5,8 +5,10 @@ from django.utils.functional import cached_property
 from rest_framework import serializers
 
 from cms.common import mixins
-from .models import Category, Article, ArticleImage, ContentModule, \
-    ArticlesModule
+from .models import (
+    Category, Article, ArticleImage, ContentModule, ArticlesModule,
+    CategoriesModule
+)
 
 
 class ArticleImageSerializer(serializers.ModelSerializer):
@@ -83,13 +85,14 @@ class CategoryArticleSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     subcategories = SubcategorySerializer(many=True)
+    image = serializers.SerializerMethodField()
     articles = serializers.SerializerMethodField()
     pagination = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = ('pk', 'name', 'description', 'subcategories', 'articles',
-                  'pagination', 'breadcrumbs', 'back_link')
+        fields = ('pk', 'name', 'description', 'image', 'subcategories',
+                  'articles', 'pagination', 'breadcrumbs', 'back_link')
 
     @cached_property
     def _pagination(self):
@@ -105,6 +108,9 @@ class CategorySerializer(serializers.ModelSerializer):
                 raise Http404
         else:
             return None
+
+    def get_image(self, obj):
+        return obj.get_image(request=self.context['request'])
 
     def get_articles(self, obj):
         if self._pagination:
@@ -131,6 +137,8 @@ class CategorySerializer(serializers.ModelSerializer):
             data.pop('pagination')
         if not obj.show_description:
             data.pop('description')
+        if not obj.show_image:
+            data.pop('image')
         if not obj.show_breadcrumbs:
             data.pop('breadcrumbs')
         if not obj.show_back_link:
@@ -186,4 +194,50 @@ class ArticlesModuleSerializer(mixins.ModuleSerializer):
         data = super(ArticlesModuleSerializer, self).to_representation(obj)
         if not obj.show_articles_titles:
             data.pop('articles_titles_headers_level')
+        return data
+
+
+class CategoriesModuleItemSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = ('pk', 'name', 'description', 'image', 'route')
+
+    def get_image(self, obj):
+        module = self.root.instance
+        return module.get_category_image(
+            category=obj, request=self.context['request']
+        )
+
+    def to_representation(self, obj):
+        data = super(CategoriesModuleItemSerializer, self) \
+            .to_representation(obj)
+        module = self.root.instance
+        if not module.show_names or not data.get('name'):
+            data.pop('name')
+        if (
+            not module.show_descriptions or
+            not data.get('description')
+        ):
+            data.pop('description')
+        if not module.show_images or not data.get('image'):
+            data.pop('image')
+        if not obj.route:
+            data.pop('route')
+        return data
+
+
+class CategoriesModuleSerializer(mixins.ModuleSerializer):
+    categories = CategoriesModuleItemSerializer(many=True, source='items')
+
+    class Meta:
+        model = CategoriesModule
+        fields = ('pk', 'name', 'module_name_header_level', 'html_class',
+                  'categories', 'names_headers_level')
+
+    def to_representation(self, obj):
+        data = super(CategoriesModuleSerializer, self).to_representation(obj)
+        if not obj.show_names:
+            data.pop('names_headers_level')
         return data

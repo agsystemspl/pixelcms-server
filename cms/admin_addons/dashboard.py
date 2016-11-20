@@ -32,7 +32,8 @@ class IndexDashboard(Dashboard):
             models=(
                 'cms.nav.models.NavModule',
                 'cms.content.models.ContentModule',
-                'cms.content.models.ArticlesModule'
+                'cms.content.models.ArticlesModule',
+                'cms.content.models.CategoriesModule'
             )
         ))
         self.children.append(modules.ModelList(
