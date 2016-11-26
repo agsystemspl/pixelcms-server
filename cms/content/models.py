@@ -180,7 +180,7 @@ class Category(mixins.Seo):
             return request.build_absolute_uri(
                 self.image.original.version_generate(version).url
             )
-        except OSError:
+        except (AttributeError, OSError):
             return None
 
     def get_article_image(self, article, request):
@@ -312,9 +312,7 @@ class ArticleImage(models.Model):
     article = models.ForeignKey(
         Article, verbose_name=_('article'), related_name='images'
     )
-    image = FileBrowseField(
-        _('image'), max_length=200, null=True, blank=True
-    )
+    image = FileBrowseField(_('image'), max_length=255)
     published = models.BooleanField(_('published'), default=True)
     order = models.PositiveSmallIntegerField(_('order'), default=0)
     title = models.CharField(
