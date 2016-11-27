@@ -52,9 +52,24 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class SubcategorySerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Category
-        fields = ('pk', 'name', 'route')
+        fields = ('pk', 'name', 'route', 'description', 'image')
+
+    def get_image(self, obj):
+        return obj.parent.get_subcategory_image(
+            category=obj, request=self.context['request']
+        )
+
+    def to_representation(self, obj):
+        data = super(SubcategorySerializer, self).to_representation(obj)
+        if not obj.parent.show_subcategories_descriptions:
+            data.pop('description')
+        if not obj.parent.show_subcategories_images or not data.get('image'):
+            data.pop('image')
+        return data
 
 
 class CategoryArticleSerializer(serializers.ModelSerializer):
@@ -72,11 +87,11 @@ class CategoryArticleSerializer(serializers.ModelSerializer):
 
     def to_representation(self, obj):
         data = super(CategoryArticleSerializer, self).to_representation(obj)
-        if not obj.category.show_article_intros:
+        if not obj.category.show_articles_intros:
             data.pop('intro')
-        if not obj.category.show_article_contents:
+        if not obj.category.show_articles_contents:
             data.pop('content')
-        if not obj.category.show_article_images or not data.get('image'):
+        if not obj.category.show_articles_images or not data.get('image'):
             data.pop('image')
         if not obj.category.show_articles_created:
             data.pop('created')
@@ -175,7 +190,7 @@ class ArticlesModuleItemSerializer(serializers.ModelSerializer):
             data.pop('intro')
         if not module.show_articles_contents or not data.get('content'):
             data.pop('content')
-        if not module.show_article_images or not data.get('image'):
+        if not module.show_articles_images or not data.get('image'):
             data.pop('image')
         if not obj.route:
             data.pop('route')

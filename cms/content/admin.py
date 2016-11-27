@@ -33,17 +33,28 @@ class CategoryAdmin(admin.ModelAdmin):
             'fields': ('name', 'slug', ('published', 'order', 'language'),
                        'parent', 'description', 'image')
         }),
-        (_('Category view settings'), {
-            'fields': ('show_description',
-                       ('show_image', 'image_size'),
-                       ('show_article_intros', 'show_article_contents',
-                        'show_articles_created'),
-                       ('show_article_images', 'articles_images_size'),
-                       ('pagination', 'articles_on_page'),
-                       ('show_breadcrumbs', 'show_back_link'))
+        (_('Category view settings - general'), {
+            'fields': (
+                'show_description', ('show_image', 'image_size'),
+                ('show_breadcrumbs', 'show_back_link')
+            )
+        }),
+        (_('Category view settings - subcategories'), {
+            'fields': (
+                'show_subcategories_descriptions',
+                ('show_subcategories_images', 'subcategories_images_size')
+            )
+        }),
+        (_('Category view settings - articles'), {
+            'fields': (
+                ('show_articles_intros', 'show_articles_contents'),
+                'show_articles_created',
+                ('show_articles_images', 'articles_images_size'),
+                ('pagination', 'articles_on_page'),
+            )
         }),
         (_('Article view settings'), {
-            'fields': ('av_articles_images_thumbnails_size',)
+            'fields': ('av_articles_images_size',)
         })
     ) + mixins.SeoAdmin.fieldsets
 
@@ -92,7 +103,7 @@ class ArticleAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('title', 'slug', ('published', 'order', 'language'),
-                       'category', 'thumbnail')
+                       'category')
         }),
         (_('Content'), {
             'description': _('<strong>Intro</strong> is displayed in category '
@@ -104,8 +115,11 @@ class ArticleAdmin(admin.ModelAdmin):
             'classes': ('placeholder images-group',),
             'fields': ()
         }),
+        (None, {
+            'fields': ('thumbnail',)
+        }),
         (_('View settings'), {
-            'fields': (('show_created', 'show_breadcrumbs', 'show_back_link'),
+            'fields': ('show_created', ('show_breadcrumbs', 'show_back_link'),
                        'images_thumbnails_size')
         }),
         (_('Dates'), {
@@ -164,7 +178,7 @@ class ArticlesModuleAdmin(mixins.ModuleAdmin):
             'fields': ('articles_limit',
                        ('show_articles_titles',
                         'articles_titles_headers_level'),
-                       ('show_article_images', 'articles_images_size'),
+                       ('show_articles_images', 'articles_images_size'),
                        'show_articles_intros', 'show_articles_contents')
         })
     ]
@@ -185,14 +199,14 @@ class CategoriesModuleCategoryInline(admin.TabularInline):
 class CategoriesModuleAdmin(mixins.ModuleAdmin):
     fieldsets = mixins.ModuleAdmin.fieldsets + [
         (None, {
-            'classes': ('placeholder articlesmodulecategory_set-group',),
+            'classes': ('placeholder categoriesmodulecategory_set-group',),
             'fields': ()
         }),
         (_('Categories module'), {
             'fields': (('show_names',
                         'names_headers_level'),
-                       'show_descriptions',
-                       ('show_images', 'images_size'))
+                       ('show_images', 'images_size'),
+                       'show_descriptions')
         })
     ]
 

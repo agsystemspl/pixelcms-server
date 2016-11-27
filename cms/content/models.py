@@ -35,6 +35,7 @@ class Category(mixins.Seo):
     description = models.TextField(_('description'), blank=True, default='')
     image = FileBrowseField(_('image'), max_length=255, null=True, blank=True)
 
+    # category view - general
     show_description = models.BooleanField(
         _('show description'), default=True
     )
@@ -42,34 +43,39 @@ class Category(mixins.Seo):
         _('show image'), default=True
     )
     image_size = FilebrowserVersionField(_('image size'))
-    show_article_intros = models.BooleanField(
-        _('show article intros'), default=True
+    show_breadcrumbs = models.BooleanField(
+        _('show bradcrumbs'), default=True
     )
-    show_article_contents = models.BooleanField(
-        _('show article contents'), default=False
+    show_back_link = models.BooleanField(_('show back link'), default=True)
+
+    # category view - subcategories
+    show_subcategories_descriptions = models.BooleanField(
+        _('show descriptions'), default=True
+    )
+    show_subcategories_images = models.BooleanField(
+        _('show images'), default=True
+    )
+    subcategories_images_size = FilebrowserVersionField(_('images size'))
+
+    # category view - articles
+    show_articles_intros = models.BooleanField(_('show intros'), default=True)
+    show_articles_contents = models.BooleanField(
+        _('show contents'), default=False
     )
     show_articles_created = models.BooleanField(
-        _('show article creation date'), default=False
+        _('show creation dates'), default=False
     )
-    show_article_images = models.BooleanField(
-        _('show article images'),
-        help_text=_('Shows thumbnail if set, otherwise first image.'),
-        default=True
-    )
-    articles_images_size = FilebrowserVersionField(_('articles images size'))
+    show_articles_images = models.BooleanField(_('show images'), default=True)
+    articles_images_size = FilebrowserVersionField(_('images size'))
 
     pagination = models.BooleanField(_('pagination'), default=True)
     articles_on_page = models.PositiveSmallIntegerField(
         _('articles on page'), default=10
     )
 
-    show_breadcrumbs = models.BooleanField(
-        _('show bradcrumbs'), default=True
-    )
-    show_back_link = models.BooleanField(_('show back link'), default=True)
-
-    av_articles_images_thumbnails_size = FilebrowserVersionField(
-        _('articles images size'), allow_null=True
+    # article view
+    av_articles_images_size = FilebrowserVersionField(
+        _('images size'), allow_null=True
     )
 
     class Meta:
@@ -183,6 +189,19 @@ class Category(mixins.Seo):
         except (AttributeError, OSError):
             return None
 
+    def get_subcategory_image(self, category, request):
+        try:
+            image = category.image.original
+        except AttributeError:
+            return None
+        version = self.subcategories_images_size
+        try:
+            return request.build_absolute_uri(
+                image.version_generate(version).url
+            )
+        except OSError:
+            return None
+
     def get_article_image(self, article, request):
         try:
             image = article.thumbnail_or_first_image.original
@@ -210,12 +229,12 @@ class Article(mixins.Seo):
         Category, verbose_name=_('category'), related_name='_articles',
         null=True, blank=True
     )
+    intro = models.TextField(_('intro'), blank=True, default='')
+    content = models.TextField(_('content'), blank=True, default='')
     thumbnail = FileBrowseField(
         _('thumbnail'), help_text=_('Displayed in category view.'),
         max_length=255, null=True, blank=True
     )
-    intro = models.TextField(_('intro'), blank=True, default='')
-    content = models.TextField(_('content'), blank=True, default='')
 
     show_created = models.BooleanField(_('show creation date'), default=False)
     show_breadcrumbs = models.BooleanField(_('show breadcrumbs'), default=True)
@@ -329,7 +348,7 @@ class ArticleImage(models.Model):
         try:
             version = (
                 self.article.images_thumbnails_size or
-                self.article.category.av_articles_images_thumbnails_size or
+                self.article.category.av_articles_images_size or
                 '3cols'
             )
         except AttributeError:
@@ -367,21 +386,21 @@ class ArticlesModule(mixins.Module):
 
     articles_limit = models.SmallIntegerField(_('articles limit'), default=5)
     show_articles_titles = models.BooleanField(
-        _('show articles titles'), default=True
+        _('show titles'), default=True
     )
     articles_titles_headers_level = models.CharField(
-        _('articles titles headers level'), max_length=1,
+        _('titles headers level'), max_length=1,
         choices=HEADERS_LEVEL_CHOICES, default='3'
     )
-    show_article_images = models.BooleanField(
-        _('show article images'), default=True
+    show_articles_images = models.BooleanField(
+        _('show images'), default=True
     )
-    articles_images_size = FilebrowserVersionField(_('articles images size'))
+    articles_images_size = FilebrowserVersionField(_('images size'))
     show_articles_intros = models.BooleanField(
-        _('show articles intros'), default=True
+        _('show intros'), default=True
     )
     show_articles_contents = models.BooleanField(
-        _('show articles contents'), default=True
+        _('show contents'), default=True
     )
 
     class Meta(mixins.Module.Meta):
@@ -464,13 +483,13 @@ class CategoriesModule(mixins.Module):
         _('names headers level'), max_length=1,
         choices=HEADERS_LEVEL_CHOICES, default='3'
     )
-    show_descriptions = models.BooleanField(
-        _('show descriptions'), default=True
-    )
     show_images = models.BooleanField(
         _('show images'), default=True
     )
     images_size = FilebrowserVersionField(_('images size'))
+    show_descriptions = models.BooleanField(
+        _('show descriptions'), default=True
+    )
 
     class Meta(mixins.Module.Meta):
         app_label = 'content'
