@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 00:35+0100\n"
-"PO-Revision-Date: 2016-11-21 00:37+0100\n"
+"POT-Creation-Date: 2016-11-30 16:14+0100\n"
+"PO-Revision-Date: 2016-11-30 16:16+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -153,7 +153,7 @@ msgstr "Powiel zaznaczone elementy."
 msgid "Admin addons"
 msgstr "Dodatki administracyjne"
 
-#: admin_addons/dashboard.py:12 content/admin.py:97 content/apps.py:7
+#: admin_addons/dashboard.py:12 content/admin.py:108 content/apps.py:7
 #: emails/admin.py:11
 msgid "Content"
 msgstr "Treść"
@@ -214,8 +214,8 @@ msgstr "dowolny"
 msgid "name"
 msgstr "nazwa"
 
-#: common/mixins.py:30 content/models.py:28 content/models.py:206
-#: content/models.py:318 nav/models.py:49 pages/models.py:22
+#: common/mixins.py:30 content/models.py:28 content/models.py:225
+#: content/models.py:335 nav/models.py:49 pages/models.py:22
 msgid "published"
 msgstr "opublikowano"
 
@@ -235,7 +235,7 @@ msgstr "Poziom nagłówka nazwy modułu"
 msgid "HTML class"
 msgstr "klasa HTML"
 
-#: common/mixins.py:45 content/models.py:30 content/models.py:208
+#: common/mixins.py:45 content/models.py:30 content/models.py:227
 #: pages/models.py:33 settings/models.py:8
 msgid "language"
 msgstr "język"
@@ -272,23 +272,31 @@ msgstr ""
 "Nadpisuje wartości z <a href=\"/admin/settings/settings/\" target=\"_blank"
 "\">ustawień globalnych</a>."
 
-#: content/admin.py:18 content/admin.py:66 pages/admin.py:74
+#: content/admin.py:18 content/admin.py:77 pages/admin.py:74
 msgid "Routes"
 msgstr "Ścieżki"
 
 #: content/admin.py:36
-msgid "Category view settings"
-msgstr "Ustawienia widoku kategorii"
+msgid "Category view settings - general"
+msgstr "Ustawienia widoku kategorii - ogólne"
 
-#: content/admin.py:45
+#: content/admin.py:42
+msgid "Category view settings - subcategories"
+msgstr "Ustawienia widoku kategorii - subkategorie"
+
+#: content/admin.py:48
+msgid "Category view settings - articles"
+msgstr "Ustawienia widoku kategorii - artykuły"
+
+#: content/admin.py:56
 msgid "Article view settings"
 msgstr "Ustawienia widoku artykułów"
 
-#: content/admin.py:79
+#: content/admin.py:90
 msgid "Image"
 msgstr "Obrazek"
 
-#: content/admin.py:98
+#: content/admin.py:109
 msgid ""
 "<strong>Intro</strong> is displayed in category view and article view, "
 "<strong>Content</strong> is displayed only in article view."
@@ -296,32 +304,32 @@ msgstr ""
 "<strong>Wstęp</strong> jest wyświetlany w widoku kategorii i widoku "
 "artykułu, <strong>Treść</strong> jest wyświetlana tylko w widoku artykułu."
 
-#: content/admin.py:107
+#: content/admin.py:121
 msgid "View settings"
 msgstr "Ustawienia ogólne"
 
-#: content/admin.py:111
+#: content/admin.py:125
 msgid "Dates"
 msgstr "Daty"
 
-#: content/admin.py:125
+#: content/admin.py:139
 msgid "Content module"
 msgstr "Moduł treści"
 
-#: content/admin.py:163
+#: content/admin.py:177
 msgid "Articles module"
 msgstr "Moduł artykułów"
 
-#: content/admin.py:191
+#: content/admin.py:205
 msgid "Categories module"
 msgstr "Moduł kategorii"
 
-#: content/models.py:25 content/models.py:203 pages/models.py:19
+#: content/models.py:25 content/models.py:222 pages/models.py:19
 msgid "slug"
 msgstr "slug"
 
-#: content/models.py:29 content/models.py:207 content/models.py:319
-#: content/models.py:430 content/models.py:445 content/models.py:505
+#: content/models.py:29 content/models.py:226 content/models.py:336
+#: content/models.py:447 content/models.py:462 content/models.py:522
 #: nav/models.py:50 pages/models.py:23
 msgid "order"
 msgstr "kolejność"
@@ -334,187 +342,167 @@ msgstr "rodzic"
 msgid "description"
 msgstr "opis"
 
-#: content/models.py:36 content/models.py:316 content/models.py:327
+#: content/models.py:36 content/models.py:334 content/models.py:344
 msgid "image"
 msgstr "obrazek"
 
-#: content/models.py:39
+#: content/models.py:40
 msgid "show description"
 msgstr "pokazuj opis"
 
-#: content/models.py:42
+#: content/models.py:43
 msgid "show image"
 msgstr "pokazuj obrazek"
 
-#: content/models.py:44
+#: content/models.py:45
 msgid "image size"
 msgstr "rozmiar obrazka"
 
-#: content/models.py:46
-msgid "show article intros"
-msgstr "pokazuj wstępy artykułów"
-
-#: content/models.py:49
-msgid "show article contents"
-msgstr "pokazuj treści artykułów"
-
-#: content/models.py:52
-msgid "show article creation date"
-msgstr "pokazuj daty utworzenia artykułów"
-
-#: content/models.py:55 content/models.py:379
-msgid "show article images"
-msgstr "pokazuj obrazki artykułów"
-
-#: content/models.py:56
-msgid "Shows thumbnail if set, otherwise first image."
-msgstr ""
-"Wyświetla miniaturkę jeśli została ustawiona, w przeciwnym razie pierwszy "
-"obrazek."
-
-#: content/models.py:59 content/models.py:72 content/models.py:381
-msgid "articles images size"
-msgstr "rozmiar obrazków artykułów"
-
-#: content/models.py:61
-msgid "pagination"
-msgstr "paginacja"
-
-#: content/models.py:63
-msgid "articles on page"
-msgstr "ilość artykułów na stronie"
-
-#: content/models.py:67
+#: content/models.py:47
 msgid "show bradcrumbs"
 msgstr "pokazuj ścieżkę powrotu"
 
-#: content/models.py:69 content/models.py:222
+#: content/models.py:49 content/models.py:241
 msgid "show back link"
 msgstr "pokazuj link powrotu"
 
-#: content/models.py:78 content/models.py:210 content/models.py:450
-#: content/models.py:510 pages/models.py:103
+#: content/models.py:53 content/models.py:491
+msgid "show descriptions"
+msgstr "pokazuj opisy"
+
+#: content/models.py:56 content/models.py:68 content/models.py:396
+#: content/models.py:487
+msgid "show images"
+msgstr "pokazuj obrazki"
+
+#: content/models.py:58 content/models.py:69 content/models.py:78
+#: content/models.py:398 content/models.py:489
+msgid "images size"
+msgstr "rozmiar obrazków"
+
+#: content/models.py:61 content/models.py:400
+msgid "show intros"
+msgstr "pokazuj wstępy"
+
+#: content/models.py:63 content/models.py:403
+msgid "show contents"
+msgstr "pokazuj treści"
+
+#: content/models.py:66
+msgid "show creation dates"
+msgstr "pokazuj daty utworzenia"
+
+#: content/models.py:71
+msgid "pagination"
+msgstr "paginacja"
+
+#: content/models.py:73
+msgid "articles on page"
+msgstr "ilość artykułów na stronie"
+
+#: content/models.py:84 content/models.py:229 content/models.py:467
+#: content/models.py:527 pages/models.py:103
 msgid "category"
 msgstr "kategoria"
 
-#: content/models.py:79 content/models.py:451 content/models.py:511
+#: content/models.py:85 content/models.py:468 content/models.py:528
 msgid "categories"
 msgstr "kategorie"
 
-#: content/models.py:201 content/models.py:321 pages/models.py:17
+#: content/models.py:220 content/models.py:338 pages/models.py:17
 msgid "title"
 msgstr "tytuł"
 
-#: content/models.py:214
-msgid "thumbnail"
-msgstr "miniaturka"
-
-#: content/models.py:214
-msgid "Displayed in category view."
-msgstr "Wyświetlane w widoku kategorii."
-
-#: content/models.py:217
+#: content/models.py:232
 msgid "intro"
 msgstr "wstęp"
 
-#: content/models.py:218 content/models.py:354 emails/models.py:19
+#: content/models.py:233 content/models.py:371 emails/models.py:19
 msgid "content"
 msgstr "treść"
 
-#: content/models.py:220
+#: content/models.py:235
+msgid "thumbnail"
+msgstr "miniaturka"
+
+#: content/models.py:235
+msgid "Displayed in category view."
+msgstr "Wyświetlane w widoku kategorii."
+
+#: content/models.py:239
 msgid "show creation date"
 msgstr "pokazuj datę utworzenia"
 
-#: content/models.py:221
+#: content/models.py:240
 msgid "show breadcrumbs"
 msgstr "pokazuj ścieżkę powrotu"
 
-#: content/models.py:224
+#: content/models.py:243
 msgid "images thumbnails size"
 msgstr "Rozmiar miniaturek obrazków"
 
-#: content/models.py:227
+#: content/models.py:246
 msgid "creation date"
 msgstr "data utworzenia"
 
-#: content/models.py:229
+#: content/models.py:248
 msgid "last modification date"
 msgstr "data ostatniej modyfikacji"
 
-#: content/models.py:235 content/models.py:313 content/models.py:435
+#: content/models.py:254 content/models.py:332 content/models.py:452
 #: pages/models.py:128
 msgid "article"
 msgstr "artykuł"
 
-#: content/models.py:236 content/models.py:436
+#: content/models.py:255 content/models.py:453
 msgid "articles"
 msgstr "artykuły"
 
-#: content/models.py:328
+#: content/models.py:345
 msgid "images"
 msgstr "obrazki"
 
-#: content/models.py:358
+#: content/models.py:375
 msgid "content module"
 msgstr "moduł treści"
 
-#: content/models.py:359
+#: content/models.py:376
 msgid "content modules"
 msgstr "moduły treści"
 
-#: content/models.py:370
+#: content/models.py:387
 msgid "articles limit"
 msgstr "limit artykułów"
 
-#: content/models.py:372
-msgid "show articles titles"
-msgstr "pokazuj tytuły artykułów"
+#: content/models.py:389
+msgid "show titles"
+msgstr "pokazuj tytuły"
 
-#: content/models.py:375
-msgid "articles titles headers level"
-msgstr "poziom nagłówków tytułów artykułów"
+#: content/models.py:392
+msgid "titles headers level"
+msgstr "poziom nagłówków nazw"
 
-#: content/models.py:383
-msgid "show articles intros"
-msgstr "pokazuj wstępy artykułów"
-
-#: content/models.py:386
-msgid "show articles contents"
-msgstr "pokazuj treści artykułów"
-
-#: content/models.py:391
+#: content/models.py:408
 msgid "articles module"
 msgstr "moduł artykułu"
 
-#: content/models.py:392
+#: content/models.py:409
 msgid "articles modules"
 msgstr "moduły artykułów"
 
-#: content/models.py:463
+#: content/models.py:480
 msgid "show names"
 msgstr "pokazuj nazwy"
 
-#: content/models.py:466
+#: content/models.py:483
 msgid "names headers level"
 msgstr "poziom nagłówków nazw"
 
-#: content/models.py:470
-msgid "show descriptions"
-msgstr "pokazuj opisy"
-
-#: content/models.py:473
-msgid "show images"
-msgstr "pokazuj obrazki"
-
-#: content/models.py:475
-msgid "images size"
-msgstr "rozmiar obrazków"
-
-#: content/models.py:479
+#: content/models.py:496
 msgid "categories module"
 msgstr "moduł kategorii"
 
-#: content/models.py:480
+#: content/models.py:497
 msgid "categories modules"
 msgstr "moduły kategorii"
 
