@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pixelcms-server',
-    version='0.3.2',
+    version='0.3.3',
     description='PixelCMS server part.',
     url='https://github.com/HurtowniaPixeli/pixelcms-server',
     author='Michał Werner',
