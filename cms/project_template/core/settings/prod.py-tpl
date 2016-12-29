@@ -8,6 +8,7 @@ HSTS = False
 DEBUG = False
 
 FRONTEND_ADDRESS = 'http://localhost:3000'
+BACKEND_ADDRESS = 'http://localhost:8000'
 
 ALLOWED_HOSTS = ()
 CORS_ORIGIN_WHITELIST = ()
