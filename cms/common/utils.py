@@ -17,7 +17,10 @@ def generate_meta(title=None, title_suffix=True, description=None,
     try:
         settings = Settings.objects.get(language=current_lang())
     except Settings.DoesNotExist:
-        settings = Settings.objects.get(language__in=served_langs())
+        try:
+            settings = Settings.objects.get(language__in=served_langs())
+        except Settings.DoesNotExist:
+            settings = Settings.objects.create()
 
     if title_suffix is None:
         title_suffix = settings.page_title_site_name_suffix

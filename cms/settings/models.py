@@ -7,7 +7,7 @@ from cms.common.fields import LanguageField
 class Settings(models.Model):
     language = LanguageField(_('language'), unique=True)
     site_name = models.CharField(
-        _('site name'), max_length=255
+        _('site name'), max_length=255, blank=True, default='PixelCMS site'
     )
     page_title_site_name_suffix = models.BooleanField(
         _('site name suffix in page title'), default=True
