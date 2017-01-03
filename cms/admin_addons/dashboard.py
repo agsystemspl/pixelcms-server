@@ -58,7 +58,6 @@ class IndexDashboard(Dashboard):
             collapsible=False,
             models=(
                 'django.contrib.auth.models.User',
-                'cms.accounts.models.Account',
                 'django.contrib.auth.models.Group'
             )
         ))

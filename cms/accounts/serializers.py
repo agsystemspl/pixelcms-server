@@ -1,10 +1,10 @@
-from rest_framework import serializers
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import (
     get_default_password_validators
 )
 
-from .models import Account
+from rest_framework import serializers
 
 
 class LoginSerializer(serializers.Serializer):
@@ -23,7 +23,7 @@ class RegisterSerializer(serializers.Serializer):
     password2 = serializers.CharField(max_length=255)
 
     def validate_username(self, val):
-        user = Account.objects.filter(user__username=val).exists()
+        user = get_user_model().objects.filter(username=val).exists()
         if user:
             raise serializers.ValidationError(
                 _('Provided username is already taken.')
@@ -31,7 +31,7 @@ class RegisterSerializer(serializers.Serializer):
         return val
 
     def validate_email(self, val):
-        user = Account.objects.filter(user__email=val).exists()
+        user = get_user_model().objects.filter(email=val).exists()
         if user:
             raise serializers.ValidationError(
                 _('Provided email address is already taken.')

@@ -1,13 +1,15 @@
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
 
-from .models import Account
+
+class UserAdminOverride(UserAdmin):
+    # removes first_name and last_name from admin site
+    list_display = ('username', 'email', 'is_staff')
+    search_fields = ('username', 'email')
+    fieldsets = UserAdmin.fieldsets
+    fieldsets[1][1]['fields'] = ('email',)
 
 
-@admin.register(Account)
-class AccountAdmin(admin.ModelAdmin):
-    def has_add_permission(self, request):
-        return False
-
-    list_display = ('user',)
-    readonly_fields = ('user',)
+admin.site.unregister(User)
+admin.site.register(User, UserAdminOverride)

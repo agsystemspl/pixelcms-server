@@ -13,7 +13,7 @@ from .serializers import (
     ResendActivationMessageSerializer, SendResetPasswordMessageSerializer,
     ResetPasswordSerializer
 )
-from .models import Account
+from . import utils as accounts_utils
 
 
 @api_view(['POST'])
@@ -24,9 +24,9 @@ def login(request):
         username_or_email = serializer.data['username_or_email']
         if '@' in username_or_email:
             try:
-                username = Account.objects \
-                    .get(user__email=username_or_email).user.username
-            except Account.DoesNotExist:
+                username = get_user_model().objects \
+                    .get(email=username_or_email).username
+            except get_user_model().DoesNotExist:
                 username = username_or_email
         else:
             username = username_or_email
@@ -68,7 +68,7 @@ def register(request):
         if settings.ACCOUNTS_ACTIVATION:
             user.is_active = False
             user.save()
-            user.account.send_activation_message(request)
+            accounts_utils.send_activation_message(user, request)
             return Response(
                 status=status.HTTP_201_CREATED,
                 data={
@@ -145,7 +145,7 @@ def resend_activation_message(request):
                 is_active=False,
                 last_login=None
             )
-            user.account.send_activation_message(request)
+            accounts_utils.send_activation_message(user, request)
             return Response(
                 status=status.HTTP_201_CREATED,
                 data={
@@ -167,7 +167,7 @@ def send_reset_password_message(request):
     if serializer.is_valid(raise_exception=True):
         try:
             user = get_user_model().objects.get(email=serializer.data['email'])
-            user.account.send_reset_password_message(request)
+            accounts_utils.send_reset_password_message(user, request)
             return Response(
                 status=status.HTTP_201_CREATED,
                 data={
