@@ -3,15 +3,16 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core import signing
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework_jwt.settings import api_settings
 
 from .serializers import (
     LoginSerializer, RegisterSerializer, ActivateSerializer,
     ResendActivationMessageSerializer, SendResetPasswordMessageSerializer,
-    ResetPasswordSerializer
+    ResetPasswordSerializer, ChangePasswordSerializer, ChangeEmailSerializer,
+    ChangeEmailConfirmationSerializer
 )
 from . import utils as accounts_utils
 
@@ -216,6 +217,95 @@ def reset_password(request):
                 data={
                     'keyError': True,
                     '_error': _('Change password key has expired.')
+                }
+            )
+        except signing.BadSignature:
+            return invalid_key_response
+
+
+@api_view(['POST'])
+@permission_classes((permissions.IsAuthenticated,))
+def change_password(request):
+    serializer = ChangePasswordSerializer(
+        data=request.data,
+        context={'request': request}
+    )
+    if serializer.is_valid(raise_exception=True):
+        request.user.set_password(serializer.data['new_password'])
+        request.user.save()
+        return Response(
+            status=status.HTTP_200_OK,
+            data={'msg': _('Your password has been changed.')}
+        )
+
+
+@api_view(['POST'])
+@permission_classes((permissions.IsAuthenticated,))
+def change_email(request):
+    serializer = ChangeEmailSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        if settings.ACCOUNTS_ACTIVATION:
+            accounts_utils.send_change_email_confirmation_message(
+                new_email=serializer.data['new_email'],
+                request=request
+            )
+            return Response(
+                status=status.HTTP_200_OK,
+                data={
+                    'msg': _('Confirmation messages has been sent to provided '
+                             'email address.')
+                }
+            )
+        else:
+            request.user.email = serializer.data['new_email']
+            request.user.save()
+            return Response(
+                status=status.HTTP_200_OK,
+                data={'msg': _('Your email has been changed.')}
+            )
+
+
+@api_view(['POST'])
+def change_email_confirmation(request):
+    serializer = ChangeEmailConfirmationSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        invalid_key_response = Response(
+            status=status.HTTP_400_BAD_REQUEST,
+            data={
+                'keyError': True,
+                '_error': _('Confirmation key is invalid.')
+            }
+        )
+        try:
+            key_data = signing.loads(serializer.data['key'], max_age=60*15)
+            if key_data.get('action') != 'CHANGE_EMAIL':
+                return invalid_key_response
+            try:
+                email_exists = get_user_model().objects \
+                    .filter(email=key_data['new_email']).exists()
+                if email_exists:
+                    return Response(
+                        status=status.HTTP_400_BAD_REQUEST,
+                        data={
+                            '_error': _('Provided email address is already '
+                                        'taken.')
+                        }
+                    )
+                user = get_user_model().objects.get(pk=key_data['user'])
+                user.email = key_data['new_email']
+                user.save()
+                return Response(
+                    status=status.HTTP_200_OK,
+                    data={'msg': _('Your email has been changed.')}
+                )
+            except get_user_model().DoesNotExist:
+                return invalid_key_response
+        except signing.SignatureExpired:
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={
+                    'keyError': True,
+                    '_error': _('Confirmation key has expired.')
                 }
             )
         except signing.BadSignature:

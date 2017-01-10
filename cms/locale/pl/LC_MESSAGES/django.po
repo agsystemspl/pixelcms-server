@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-30 16:14+0100\n"
-"PO-Revision-Date: 2016-11-30 16:16+0100\n"
+"POT-Creation-Date: 2017-01-07 13:00+0100\n"
+"PO-Revision-Date: 2017-01-07 13:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -23,19 +23,24 @@ msgstr ""
 msgid "Accounts"
 msgstr "Konta"
 
-#: accounts/models.py:14
-msgid "user"
-msgstr "użytkownik"
+#: accounts/serializers.py:29
+msgid "Provided username is already taken."
+msgstr "Podana nazwa użytkownika jest już zajęta."
 
-#: accounts/models.py:20
-msgid "account"
-msgstr "konto"
+#: accounts/serializers.py:37 accounts/serializers.py:117 accounts/views.py:290
+msgid "Provided email address is already taken."
+msgstr "Podany adres email jest już zajęty."
 
-#: accounts/models.py:21
-msgid "accounts"
-msgstr "konta"
+#: accounts/serializers.py:49 accounts/serializers.py:78
+#: accounts/serializers.py:106
+msgid "Passwords do not match."
+msgstr "Hasła nie pasują do siebie."
 
-#: accounts/models.py:39
+#: accounts/serializers.py:94
+msgid "Current password is invalid."
+msgstr "Obecne hasło jest nieprawidłowe."
+
+#: accounts/utils.py:21
 msgid ""
 "Your accounts has been created. To activate it click on link below, or copy "
 "it to your browser."
@@ -43,41 +48,35 @@ msgstr ""
 "Twoje konto zostało utworzone. Aby je aktywować kliknij w link poniżej, lub "
 "skopiuj go do przeglądarki."
 
-#: accounts/models.py:43
+#: accounts/utils.py:25
 msgid "Activate your account"
 msgstr "Aktywuj swoje konto"
 
-#: accounts/models.py:62
+#: accounts/utils.py:45
 msgid "To change you password click on link below, or copy it to your browser."
 msgstr ""
 "Aby zmienić swoje hasło kliknij w link poniżej, lub skopiuj go do "
 "przeglądarki."
 
-#: accounts/models.py:66
+#: accounts/utils.py:49 accounts/utils.py:77
 msgid "Change your password"
 msgstr "Zmień swoje hasło"
 
-#: accounts/serializers.py:29
-msgid "Provided username is already taken."
-msgstr "Podana nazwa użytkownika jest już zajęta."
+#: accounts/utils.py:73
+msgid "To change you email click on link below, or copy it to your browser."
+msgstr ""
+"Aby zmienić swój email kliknij w link poniżej, lub skopiuj go do "
+"przeglądarki."
 
-#: accounts/serializers.py:37
-msgid "Provided email address is already taken."
-msgstr "Podany adres email jest już zajęty."
-
-#: accounts/serializers.py:49 accounts/serializers.py:78
-msgid "Passwords do not match."
-msgstr "Hasła nie pasują do siebie"
-
-#: accounts/views.py:50
+#: accounts/views.py:51
 msgid "You have been logged in."
 msgstr "Zalogowano."
 
-#: accounts/views.py:55
+#: accounts/views.py:56
 msgid "Wrong username or password."
 msgstr "Nieprawidłowa nazwa użytkownika, lub hasło."
 
-#: accounts/views.py:76
+#: accounts/views.py:77
 msgid ""
 "Your account has been created. Activation message has been sent to provided "
 "email address."
@@ -85,39 +84,39 @@ msgstr ""
 "Twoje konto zostało utworzone. Wiadomość aktywacyjna została wysłana na "
 "podany adres email."
 
-#: accounts/views.py:89
+#: accounts/views.py:90
 msgid "You account has been created. You can log in."
 msgstr "Twoje konto zostało utworzone. Możesz się zalogować."
 
-#: accounts/views.py:100
+#: accounts/views.py:101
 msgid "Activation key is invalid."
 msgstr "Klucz aktywacyjny jest nieprawidłowy."
 
-#: accounts/views.py:117
+#: accounts/views.py:118
 msgid "Your account is now active. You can log in."
 msgstr "Twoje konto zostało aktywowane. Możesz się zalogować."
 
-#: accounts/views.py:123
+#: accounts/views.py:124
 msgid ""
 "Activation key is not associated with any account that needs activation."
 msgstr ""
 "Klucz aktywacyjny nie jest powiązany z żadnym kontem wymagającym aktywacji."
 
-#: accounts/views.py:131
+#: accounts/views.py:132
 msgid "Activation key has expired."
 msgstr "Klucz aktywacyjny wygasł."
 
-#: accounts/views.py:152
+#: accounts/views.py:153
 msgid "Activation message has been sent to provided email address."
 msgstr "Wiadomość aktywacyjna została wysłana na podany adres email."
 
-#: accounts/views.py:159
+#: accounts/views.py:160
 msgid ""
 "Provided email is not associated with any account that needs to be activated."
 msgstr ""
 "Podany adres email nie jest powiązany z żadnym kontem wymagającym aktywacji."
 
-#: accounts/views.py:174
+#: accounts/views.py:175
 msgid ""
 "Message with instructions how to change your password has been sent to "
 "provided email address."
@@ -125,21 +124,41 @@ msgstr ""
 "Wiadomość z instrukcjami jak zmienić hasło została wysłana na podany adres "
 "email."
 
-#: accounts/views.py:182
+#: accounts/views.py:183
 msgid "Provided email is not associated with any account."
 msgstr "Podany adres email nie jest powiązany z żadnym kontem."
 
-#: accounts/views.py:195
+#: accounts/views.py:196
 msgid "Change password key is invalid."
 msgstr "Klucz zmiany hasła jest nieprawidłowy."
 
-#: accounts/views.py:208
+#: accounts/views.py:209
 msgid "Your password has been changed. You can log in."
 msgstr "Twoje hasło zostało zmienione. Możesz się zalogować."
 
-#: accounts/views.py:218
+#: accounts/views.py:219
 msgid "Change password key has expired."
 msgstr "Klucz zmiany hasła wygasł."
+
+#: accounts/views.py:238
+msgid "Your password has been changed."
+msgstr "Twoje hasło zostało zmienione."
+
+#: accounts/views.py:255
+msgid "Confirmation messages has been sent to provided email address."
+msgstr "Wiadomość potwierdzająca została wysłana na podany adres email."
+
+#: accounts/views.py:264 accounts/views.py:299
+msgid "Your email has been changed."
+msgstr "Twoje email został zmieniony."
+
+#: accounts/views.py:276
+msgid "Confirmation key is invalid."
+msgstr "Klucz potwierdzający jest nieprawidłowy."
+
+#: accounts/views.py:308
+msgid "Confirmation key has expired."
+msgstr "Klucz potwierdzający wygasł."
 
 #: admin_addons/actions.py:13
 msgid "Failed to duplicate \"{}\"."
@@ -178,11 +197,11 @@ msgstr "Ustawienia"
 msgid "Users"
 msgstr "Użytkownicy"
 
-#: admin_addons/dashboard.py:66
+#: admin_addons/dashboard.py:65
 msgid "Files"
 msgstr "Pliki"
 
-#: admin_addons/dashboard.py:71
+#: admin_addons/dashboard.py:70
 msgid "Manage files"
 msgstr "Zarządzaj plikami"
 
