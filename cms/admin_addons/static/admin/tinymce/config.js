@@ -1,5 +1,5 @@
 tinymce.init({
-    selector: 'textarea',
+    selector: 'textarea:not(.no-tinymce)',
     height: 250,
     plugins: 'searchreplace textcolor colorpicker table link anchor image imagetools media charmap hr code visualblocks',
     menubar: '',
