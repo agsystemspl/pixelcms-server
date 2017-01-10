@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 13:00+0100\n"
-"PO-Revision-Date: 2017-01-07 13:01+0100\n"
+"POT-Creation-Date: 2017-01-11 00:51+0100\n"
+"PO-Revision-Date: 2017-01-11 00:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -173,7 +173,7 @@ msgid "Admin addons"
 msgstr "Dodatki administracyjne"
 
 #: admin_addons/dashboard.py:12 content/admin.py:108 content/apps.py:7
-#: emails/admin.py:11
+#: emails/admin.py:23 emails/admin.py:111
 msgid "Content"
 msgstr "Treść"
 
@@ -189,19 +189,19 @@ msgstr "Moduły"
 msgid "Emails"
 msgstr "Emaile"
 
-#: admin_addons/dashboard.py:48 settings/apps.py:7
+#: admin_addons/dashboard.py:49 settings/apps.py:7
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: admin_addons/dashboard.py:56
+#: admin_addons/dashboard.py:57
 msgid "Users"
 msgstr "Użytkownicy"
 
-#: admin_addons/dashboard.py:65
+#: admin_addons/dashboard.py:66
 msgid "Files"
 msgstr "Pliki"
 
-#: admin_addons/dashboard.py:70
+#: admin_addons/dashboard.py:71
 msgid "Manage files"
 msgstr "Zarządzaj plikami"
 
@@ -437,6 +437,7 @@ msgid "intro"
 msgstr "wstęp"
 
 #: content/models.py:233 content/models.py:371 emails/models.py:19
+#: emails/models.py:91
 msgid "content"
 msgstr "treść"
 
@@ -525,37 +526,58 @@ msgstr "moduł kategorii"
 msgid "categories modules"
 msgstr "moduły kategorii"
 
-#: emails/models.py:17
+#: emails/admin.py:86
+msgid "Mass message has been queued for sending."
+msgstr "Wiadomość masowa została zakolejkowana do wysłania."
+
+#: emails/admin.py:92
+msgid "Mass message object does not exist or has been already sent."
+msgstr ""
+"Obiekt wiadomości masowej nie istnieje, lub wiadomość została już wysłana."
+
+#: emails/admin.py:102 emails/admin.py:106
+msgid "Send"
+msgstr "Wyślij"
+
+#: emails/models.py:17 emails/models.py:87
 msgid "subject"
 msgstr "temat"
 
-#: emails/models.py:18
+#: emails/models.py:18 emails/models.py:89
 msgid "recipients"
 msgstr "odbiorcy"
 
-#: emails/models.py:20
+#: emails/models.py:20 emails/models.py:92
 msgid "reply to"
 msgstr "odpowiedź do"
 
-#: emails/models.py:21
+#: emails/models.py:21 emails/models.py:93
 msgid "created"
 msgstr "utworzono"
 
-#: emails/models.py:22
+#: emails/models.py:22 emails/models.py:94
 msgid "sent"
 msgstr "wysłano"
 
-#: emails/models.py:23
+#: emails/models.py:23 emails/models.py:95
 msgid "postdate"
 msgstr "data wysłania"
 
-#: emails/models.py:28
+#: emails/models.py:29
 msgid "message"
 msgstr "wiadomość"
 
-#: emails/models.py:29
+#: emails/models.py:30
 msgid "messages"
 msgstr "wiadomości"
+
+#: emails/models.py:100
+msgid "mass message"
+msgstr "wiadomość masowa"
+
+#: emails/models.py:101
+msgid "mass messages"
+msgstr "wiadomości masowe"
 
 #: emails/serializers.py:15
 msgid "(not provided)"

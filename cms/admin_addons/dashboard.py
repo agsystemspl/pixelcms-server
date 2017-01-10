@@ -42,6 +42,7 @@ class IndexDashboard(Dashboard):
             collapsible=False,
             models=(
                 'cms.emails.models.Message',
+                'cms.emails.models.MassMessage',
             )
         ))
         self.children.append(modules.ModelList(

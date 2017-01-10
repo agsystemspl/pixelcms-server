@@ -21,6 +21,7 @@ class Message(models.Model):
     created = models.DateTimeField(_('created'), auto_now_add=True)
     sent = models.BooleanField(_('sent'), default=False)
     postdate = models.DateTimeField(_('postdate'), null=True, blank=True)
+    send_immediately = models.BooleanField(default=True)
 
     class Meta:
         app_label = 'emails'
@@ -77,6 +78,27 @@ class Message(models.Model):
 
 
 @receiver(post_save, sender=Message)
-def create_user_hook(sender, instance, created, **kwargs):
-    if created:
+def create_message_hook(sender, instance, created, **kwargs):
+    if created and instance.send_immediately:
         instance.send()
+
+
+class MassMessage(models.Model):
+    subject = models.CharField(_('subject'), max_length=255)
+    recipients = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, verbose_name=_('recipients')
+    )
+    content = models.TextField(_('content'))
+    reply_to = models.CharField(_('reply to'), max_length=255)
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    sent = models.BooleanField(_('sent'), default=False)
+    postdate = models.DateTimeField(_('postdate'), null=True, blank=True)
+
+    class Meta:
+        app_label = 'emails'
+        ordering = ('-created',)
+        verbose_name = _('mass message')
+        verbose_name_plural = _('mass messages')
+
+    def __str__(self):
+        return self.subject
