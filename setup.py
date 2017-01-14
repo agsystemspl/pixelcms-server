@@ -37,7 +37,9 @@ setup(
         'Pillow>=3.3.1,<4',
         'psycopg2>=2.6.2,<3',
         'Pygments>=2.1.3,<3',
+        'rest-social-auth>=1.0.0,<2',
         'requests>=2.11.1,<3',
+        'social-auth-app-django>=0.1.0,<0.2',
         'sqlparse>=0.2.1,<1',
         'Unidecode>=0.4.19,<1'
     ],

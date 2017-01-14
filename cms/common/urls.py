@@ -11,7 +11,8 @@ urlpatterns = [
     url(r'^api/', include(api_urls)),
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^admin/grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls))
+    url(r'^admin/', include(admin.site.urls)),
+    # url(r'^social/', include('social_django.urls', namespace='social'))
 ]
 
 if settings.DEBUG:

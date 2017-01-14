@@ -7,6 +7,11 @@ from . import views
 
 urlpatterns = [
     url(r'^login/$', views.login),
+    url(
+        r'^social-login-begin/(?P<backend>[0-9a-z\-_]+)/$',
+        views.social_login_begin
+    ),
+    url(r'^social-login-complete/$', views.SocialView.as_view()),
     url(r'^refresh-token/', jwt_views.refresh_jwt_token),
     url(r'^register/$', views.register),
     url(r'^activate/$', views.activate),

@@ -7,6 +7,10 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from rest_framework_jwt.settings import api_settings
+from social_django.utils import load_strategy, load_backend
+from social_core.actions import do_auth
+from social_core.exceptions import MissingBackend
+from rest_social_auth.views import SocialJWTUserAuthView
 
 from .serializers import (
     LoginSerializer, RegisterSerializer, ActivateSerializer,
@@ -55,6 +59,55 @@ def login(request):
         status=status.HTTP_403_FORBIDDEN,
         data={'_error': _('Wrong username or password.')}
     )
+
+
+@api_view(['POST'])
+def social_login_begin(request, backend):
+    strategy = load_strategy(request)
+    try:
+        redirect_uri = (
+            settings.FRONTEND_ADDRESS +
+            '/accounts/social-auth/' +
+            backend +
+            '/'
+        )
+        backend = load_backend(
+            strategy=strategy,
+            name=backend,
+            redirect_uri=redirect_uri
+        )
+    except MissingBackend:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    auth = do_auth(backend)
+    if auth:
+        return Response({'url': auth.url})
+    else:
+        return Response(status=status.HTTP_500_SERVER_ERROR)
+
+
+class SocialView(SocialJWTUserAuthView):
+    def respond_error(self, error):
+        return Response(
+            status=status.HTTP_400_BAD_REQUEST,
+            data={'_error': str(error)}
+        )
+
+    def post(self, request, *args, **kwargs):
+        res = super(SocialView, self).post(request, *args, **kwargs)
+        if res.status_code != 200:
+            return res
+        token = res.data['token']
+        user = get_user_model().objects.get(pk=res.data['id'])
+        response_payload = api_settings.JWT_RESPONSE_PAYLOAD_HANDLER(
+            token, user
+        )
+        return Response(
+            status=status.HTTP_200_OK,
+            data={
+                'authInfo': response_payload,
+                'msg': _('You have been logged in.')
+            }
+        )
 
 
 @api_view(['POST'])
