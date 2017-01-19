@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model, authenticate
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core import signing
+from django.shortcuts import Http404
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -30,7 +31,8 @@ def login(request):
         if '@' in username_or_email:
             try:
                 username = get_user_model().objects \
-                    .get(email=username_or_email).username
+                    .get(email=username_or_email, social_auth__isnull=True) \
+                    .username
             except get_user_model().DoesNotExist:
                 username = username_or_email
         else:
@@ -161,7 +163,8 @@ def activate(request):
                 user = get_user_model().objects.get(
                     pk=key_data['user'],
                     is_active=False,
-                    last_login=None
+                    last_login=None,
+                    social_auth__isnull=True
                 )
                 if not user.is_active:
                     user.is_active = True
@@ -197,7 +200,8 @@ def resend_activation_message(request):
             user = get_user_model().objects.get(
                 email=serializer.data['email'],
                 is_active=False,
-                last_login=None
+                last_login=None,
+                social_auth__isnull=True
             )
             accounts_utils.send_activation_message(user, request)
             return Response(
@@ -220,7 +224,10 @@ def send_reset_password_message(request):
     serializer = SendResetPasswordMessageSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         try:
-            user = get_user_model().objects.get(email=serializer.data['email'])
+            user = get_user_model().objects.get(
+                email=serializer.data['email'],
+                social_auth__isnull=True
+            )
             accounts_utils.send_reset_password_message(user, request)
             return Response(
                 status=status.HTTP_201_CREATED,
@@ -254,7 +261,10 @@ def reset_password(request):
             if key_data.get('action') != 'RESET_PASSWORD':
                 return invalid_key_response
             try:
-                user = get_user_model().objects.get(pk=key_data['user'])
+                user = get_user_model().objects.get(
+                    pk=key_data['user'],
+                    social_auth__isnull=True
+                )
                 user.set_password(serializer.data['password'])
                 user.save()
                 return Response(
@@ -279,6 +289,8 @@ def reset_password(request):
 @api_view(['POST'])
 @permission_classes((permissions.IsAuthenticated,))
 def change_password(request):
+    if request.user.social_auth.exists():
+        raise Http404
     serializer = ChangePasswordSerializer(
         data=request.data,
         context={'request': request}
@@ -295,6 +307,8 @@ def change_password(request):
 @api_view(['POST'])
 @permission_classes((permissions.IsAuthenticated,))
 def change_email(request):
+    if request.user.social_auth.exists():
+        raise Http404
     serializer = ChangeEmailSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         if settings.ACCOUNTS_ACTIVATION:
@@ -344,7 +358,10 @@ def change_email_confirmation(request):
                                         'taken.')
                         }
                     )
-                user = get_user_model().objects.get(pk=key_data['user'])
+                user = get_user_model().objects.get(
+                    pk=key_data['user'],
+                    social_auth__isnull=True
+                )
                 user.email = key_data['new_email']
                 user.save()
                 return Response(
