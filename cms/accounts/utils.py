@@ -79,3 +79,11 @@ def send_change_email_confirmation_message(new_email, request):
         content=content,
         reply_to='no-reply'
     )
+
+
+def is_google_oauth2_auth(user):
+    return user.social_auth.filter(provider='google-oauth2').exists()
+
+
+def is_facebook_auth(user):
+    return user.social_auth.filter(provider='facebook').exists()
